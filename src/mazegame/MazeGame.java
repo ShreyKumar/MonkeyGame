@@ -76,4 +76,6 @@ public class MazeGame {
         sc.close();
         return new int[]{numRows, numCols};
     }
+    
+    
 }

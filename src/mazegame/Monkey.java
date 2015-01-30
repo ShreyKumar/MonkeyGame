@@ -33,4 +33,8 @@ public class Monkey extends Sprite implements Moveable {
 	public int getScore(){
 		return this.score;
 	}
+	
+	public void move(int col, int row){
+		
+	}
 }
