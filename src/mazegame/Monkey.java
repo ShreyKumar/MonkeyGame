@@ -1,13 +1,16 @@
 package mazegame;
 
+
 public class Monkey extends Sprite implements Moveable {
 	protected int numMoves;
 	protected int score;
 	
 	
-	public Monkey(int numMoves, int score){
+	public Monkey(int numMoves, int score, char symbol, int row, int column){
 		super(symbol, row, column);
-		
+		this.symbol = symbol;
+		this.row = row;
+		this.column = column;
 		this.numMoves = numMoves;
 		this.score = score;
 	}
@@ -35,6 +38,7 @@ public class Monkey extends Sprite implements Moveable {
 	}
 	
 	public void move(int col, int row){
-		
+		this.row += row;
+		this.column += col;
 	}
 }

@@ -2,18 +2,18 @@ package mazegame;
 
 public abstract class Sprite {
 	/** The Sprite's symbol */
-	protected static char symbol;
+	protected char symbol;
 	
 	/** The Sprite's current row */
-	protected static int row;
+	protected int row;
 
 	/** The Sprite's current column */
-	protected static int column;
+	protected int column;
 	
 	public Sprite(char symbol, int row, int column) {
-		Sprite.symbol = symbol;
-		Sprite.row = row;
-		Sprite.column = column;
+		this.symbol = symbol;
+		this.row = row;
+		this.column = column;
 	}
 	
 	/**
@@ -21,21 +21,21 @@ public abstract class Sprite {
 	 * @return the symbol of the sprite (X, , B or M)
 	 */
 	public char getSymbol() {
-		return Sprite.symbol;
+		return this.symbol;
 	}
 	/**
 	 * Returns the current row of the sprite
 	 * @return the current row of the sprite in integer form
 	 */
 	public int getRow(){
-		return Sprite.row;
+		return this.row;
 	}
 	/**
 	 * Returns the current column of the sprite
 	 * @return the current column of the sprite in integer form
 	 */
 	public int getColumn(){
-		return Sprite.column;
+		return this.column;
 	}
 	/**
 	 * Returns the String representation of this Sprite
@@ -43,7 +43,7 @@ public abstract class Sprite {
 	 */
 	@Override
 	public String toString(){
-		return "test";
+		return Character.toString(this.getSymbol());
 	}
 
 }
