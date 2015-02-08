@@ -7,35 +7,45 @@ public class ArrayGrid<T> implements Grid<T>{
 	
 	
 	@SuppressWarnings("unchecked")
-	public ArrayGrid(int numCols, int numRows){
+	public ArrayGrid( int numRows, int numCols){
 		this.numCols = numCols;
 		this.numRows = numRows;
-		this.arraygrid =  (T[][]) new ArrayGrid[this.numRows][this.numCols];
+		this.arraygrid =  (T[][]) new Object[this.numRows][this.numCols];
+		//this.arraygrid = T[this.numRows][this.numCols];
 	}
 	
 	/**
-	 * 
+	 * Returns the number of columns
 	 */
 	public int getNumCols(){
 		return this.numCols;
 	}
 	
 	/**
-	 * 
+	 * Returns the number of rows
 	 */
 	public int getNumRows(){
 		return this.numRows;
 	}
 	
+	/**
+	 * Sets a particular cell in arraygrid to an item T
+	 */
 	public void setCell(int row, int col, T item){
 		this.arraygrid[row][col] = item;
 	}
 	
+	/**
+	 * Returns an element T at a given row and col
+	 */
 	public T getCell(int row, int col){
 		return this.arraygrid[row][col];
 	}
 
 	@Override
+	/**
+	 * Returns if two array grids are identical
+	 */
 	public boolean equals(Grid<T> other) {
 		for(int a = 0; a < this.numRows; a++){
 			for(int b = 0; b < this.numCols; b++){

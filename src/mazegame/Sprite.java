@@ -39,11 +39,13 @@ public abstract class Sprite {
 	}
 	/**
 	 * Returns the String representation of this Sprite
-	 * NOTE: to do for later
 	 */
 	@Override
 	public String toString(){
 		return Character.toString(this.getSymbol());
 	}
+
+	
+	
 
 }

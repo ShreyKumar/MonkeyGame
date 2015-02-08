@@ -1,7 +1,10 @@
 package ui;
 
 import java.awt.*;
+import java.io.IOException;
+
 import javax.swing.*;
+
 import mazegame.MazeGame;
 
 
@@ -24,12 +27,13 @@ public class GUI extends JFrame implements UI {
      * Returns the MazeGame of this GUI.
      * @return the MazeGame of this GUI
      */
+    
     public MazeGame getGame() {
         return game;
     }
 
     @Override
-    public void launchGame() {
+    public void launchGame() throws IOException {
         int numRows = game.getNumRows();
         int numCols = game.getNumCols();
         
@@ -79,8 +83,9 @@ public class GUI extends JFrame implements UI {
         setVisible(false);
     }
 
-    /** Update the grid display. */
-    public void updateLabels() {
+    /** Update the grid display. 
+     * @throws IOException */
+    public void updateLabels() throws IOException {
         int numRows = game.getNumRows();
         int numCols = game.getNumCols();
 

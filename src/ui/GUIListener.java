@@ -1,11 +1,11 @@
 package ui;
 
 import java.awt.event.*;
+import java.io.IOException;
 
 /** A listener for the GUI window. */
 public class GUIListener extends KeyAdapter {
   
-	
     /** A GUI for the maze game. */
     private GUI window;
 
@@ -25,10 +25,15 @@ public class GUIListener extends KeyAdapter {
     public void keyTyped(KeyEvent event) {
         char nextMove = event.getKeyChar();
         this.window.getGame().move(nextMove);
-        this.window.updateLabels();
+        try {
+			this.window.updateLabels();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @Override
     public void keyReleased(KeyEvent event) {
     } 
 }
+
