@@ -9,11 +9,7 @@ public class MobileBanana extends Banana implements Moveable{
 		this.value = value;
 	}
 	public void move(int row, int col){
-		for(int i = 0; i < row; i++){
-			for(int j = 0; j < col; j++){
-				this.row += row;
-				this.column += col;	
-			}
-		}
+		this.row += row;
+		this.column += column;
 	}
 }

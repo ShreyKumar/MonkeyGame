@@ -123,23 +123,68 @@ public class MazeGame {
     }
     
     /**
+     * Returns true if cell is a valid spot to move
+     * @param move the Sprite inside ArrayGrid
+     * @return true if Sprite is not a wall and not a visited sprite
+     */
+    
+    private boolean valid_space(Sprite move){
+    	return move.getSymbol() != MazeConstants.WALL && move.getSymbol() != MazeConstants.VISITED;
+    }
+    
+    /**
      * Adds a visited sprite in original position and checks if the move symbol is a Banana and increments the players score
      * @param player the player to move	
      * @param col the player's current column position
      * @param row the player's current row position
      * @param move_symbol the symbol of the sprite in which the player will move into
      */
-    private void move_sprite(Monkey player, int col, int row, Sprite move){
-		if(move.getSymbol() != MazeConstants.WALL){
+    
+    private void move_sprite(Monkey player, int col, int row, Sprite move, String direction){
+		if(this.valid_space(move)){
+			/* create a new visited sprite and store it in player's original position */
 			VisitedHallway visited = new VisitedHallway(MazeConstants.VISITED, row, col);
 			maze.setCell(row, col, visited);
 			if(move.getSymbol() == MazeConstants.MOBILE_BANANA){
+				bananas.remove(move);
 				player.score += MazeConstants.MOBILE_BANANA_SCORE;
 			} else if(move.getSymbol() == MazeConstants.BANANA) {
 				bananas.remove(move);
 				player.score += MazeConstants.BANANA_SCORE;
 			}
+			
+			switch(direction){
+				case "up":
+					player.row -= 1;
+					maze.setCell(player.getRow(), player.getColumn(), player);
+					break;
+				case "down":
+					player.row += 1;
+					maze.setCell(player.getRow(), player.getColumn(), player);
+					break;
+				case "right":
+					player.column += 1;
+					maze.setCell(player.getRow(), player.getColumn(), player);
+					break;
+				case "left":
+					player.column -= 1;
+					maze.setCell(player.getRow(), player.getColumn(), player);
+					break;
+			}
 		}
+    }
+    
+    private void move_mobile(MobileBanana mobile){
+    	//pick random row and column and limit to 1 move
+    	int randomrow = random.nextInt(2);
+    	int randomcol = random.nextInt(2);
+    	
+    	//System.out.println(randomrow);
+    	//System.out.println(randomcol);
+    	if(this.valid_space(maze.getCell(mobile.getRow()+1, mobile.getColumn()))){
+    		mobile.move(randomrow, randomcol);
+    		maze.setCell(mobile.getRow(), mobile.getColumn(), mobile);
+    	}
     }
     
     /**
@@ -149,47 +194,36 @@ public class MazeGame {
     
     public void move(char nextMove){
     	/* Mobile Banana movement */
-    	//pick random row and column and limit to 1 move
-    	int randomrow = random.nextInt(2);
-    	int randomcol = random.nextInt(2);
-    	
+    	/*
     	for(int i = 0; i < bananas.size(); i++){
-    		Sprite sprite = bananas.get(i);
-    		if(sprite.symbol == 'M'){
-    			MobileBanana mobban = (MobileBanana) sprite;
-    			mobban.move(randomrow, randomcol);
+    		if(bananas.get(i).getSymbol() == MazeConstants.MOBILE_BANANA){
+    			MobileBanana mobile = (MobileBanana) bananas.get(i);
+    			this.move_mobile(mobile);
     		}
     	}
+    	*/
     	
     	//player1
     	if(nextMove == MazeConstants.P1_UP){
         	Sprite tomove = maze.getCell(player1.getRow()-1, player1.getColumn());
-    		this.move_sprite(player1, player1.getColumn(), player1.getRow(), tomove);
-    		player1.row -= 1;
+    		this.move_sprite(player1, player1.getColumn(), player1.getRow(), tomove, "up");
     	} else if(nextMove == MazeConstants.P1_LEFT){
-    		this.move_sprite(player1, player1.getColumn(), player1.getRow(), maze.getCell(player1.getRow(), player1.getColumn()-1));
-    		player1.column -= 1;
+    		this.move_sprite(player1, player1.getColumn(), player1.getRow(), maze.getCell(player1.getRow(), player1.getColumn()-1), "left");
     	} else if(nextMove == MazeConstants.P1_DOWN){
-    		this.move_sprite(player1, player1.getColumn(), player1.getRow(), maze.getCell(player1.getRow(), player1.getColumn()-1));
-    		player1.row += 1;
+    		this.move_sprite(player1, player1.getColumn(), player1.getRow(), maze.getCell(player1.getRow()+1, player1.getColumn()), "down");
     	} else if(nextMove == MazeConstants.P1_RIGHT){
-    		this.move_sprite(player1, player1.getColumn(), player1.getRow(), maze.getCell(player1.getRow(), player1.getColumn()-1));
-    		player1.column += 1;
+    		this.move_sprite(player1, player1.getColumn(), player1.getRow(), maze.getCell(player1.getRow(), player1.getColumn()+1), "right");
     	}
     	
     	//player2
     	if(nextMove == MazeConstants.P2_UP){
-    		this.move_sprite(player2, player2.getColumn(), player2.getRow(), maze.getCell(player2.getRow(), player2.getColumn()-1));
-    		player2.row -= 1;
+    		this.move_sprite(player2, player2.getColumn(), player2.getRow(), maze.getCell(player2.getRow()-1, player2.getColumn()), "up");
     	} else if(nextMove == MazeConstants.P2_LEFT){
-    		this.move_sprite(player2, player2.getColumn(), player2.getRow(), maze.getCell(player2.getRow(), player2.getColumn()-1));
-    		player2.column -= 1;
+    		this.move_sprite(player2, player2.getColumn(), player2.getRow(), maze.getCell(player2.getRow(), player2.getColumn()-1), "left");
     	} else if(nextMove == MazeConstants.P2_DOWN){
-    		this.move_sprite(player2, player2.getColumn(), player2.getRow(), maze.getCell(player2.getRow(), player2.getColumn()-1));
-    		player2.row += 1;
+    		this.move_sprite(player2, player2.getColumn(), player2.getRow(), maze.getCell(player2.getRow()+1, player2.getColumn()-1), "down");
     	} else if(nextMove == MazeConstants.P2_RIGHT){
-    		this.move_sprite(player2, player2.getColumn(), player2.getRow(), maze.getCell(player2.getRow(), player2.getColumn()-1));
-    		player2.column += 1;
+    		this.move_sprite(player2, player2.getColumn(), player2.getRow(), maze.getCell(player2.getRow(), player2.getColumn()+1), "right");
     	}
     }
     
@@ -197,7 +231,9 @@ public class MazeGame {
      * Returns the ID of the player with the greatest score
      */
     public int hasWon(){
-		if(player1.getScore() > player2.getScore()){
+    	if(!this.isBlocked()){
+    		return 0;
+    	} else if(player1.getScore() > player2.getScore()){
 			return 1;
 		} else if(player1.getScore() < player2.getScore()){
 			return 2;

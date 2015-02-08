@@ -15,8 +15,7 @@ public class Play {
         
         if (MazeConstants.UI_TYPE.equals("text")) {
             gameUI = new TextUI(game);
-        }
-        else {
+        } else {
             gameUI = new GUI(game);
         }
         

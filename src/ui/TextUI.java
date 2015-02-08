@@ -1,6 +1,7 @@
 package ui;
 import java.io.IOException;
 import java.util.Scanner;
+
 import mazegame.MazeGame;
 
 
@@ -25,22 +26,48 @@ public class TextUI implements UI {
 		}
 	}
 
+	private void updateGame() throws IOException{
+		for(int i = 0; i < this.game.getNumRows(); i++){
+			for(int j = 0; j < this.game.getNumCols(); j++){
+				System.out.println(this.game.get(i, j).toString());
+			}
+		}
+	}
+	
 	@Override
 	public void launchGame() throws IOException {
-		//print once 
-		this.printGrid();
-		System.out.println("Your next Move:");
-		Scanner input = new Scanner(System.in);
-		char text_input = input.next().charAt(0);
-		game.move(text_input);
-		input.close();
-		this.printGrid();
+		while(true){
+			this.printGrid();
+			System.out.println("Your next move:");
+			Scanner input_str = new Scanner(System.in);
+			this.game.move(input_str.nextLine().charAt(0));
+			this.updateGame();
+			input_str.close();
+		}
 	}
 
 	@Override
 	public void displayWinner() {
-		// TODO Auto-generated method stub
-		
+		 int won = game.hasWon();        
+	        String message;
+	        
+	        if (game.isBlocked()) { // no winners
+	            message = "Game over! Both players are stuck.";
+	        } else {
+	            if (won == 0) { // game is still on
+	                return;
+	            } else if (won == 1) {
+	                message = "Congratulations Player 1! You won the maze in " + 
+	                          game.getPlayerOne().getNumMoves() + " moves.";
+	            } else if (won == 2) { 
+	                message = "Congratulations Player 2! You won the maze in " + 
+	                          game.getPlayerTwo().getNumMoves() + " moves.";
+	            } else { // it's a tie
+	                message = "It's a tie!";
+	            }
+	        }
+	        
+	        System.out.println(message);
 	}
 	
 
