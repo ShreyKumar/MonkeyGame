@@ -5,7 +5,7 @@ public class MazeConstants {
     
     public static final String FILENAME = "/Users/shreyanshkumar/c4kumars/a1/A1workingcopy/src/maze1.txt"; // set to your path
     
-    public static final String UI_TYPE = "text"; // set to "text" or "gui"
+    public static final String UI_TYPE = "gui"; // set to "text" or "gui"
     
     /** The symbol for a visited location. */
     public static final char VISITED = '.';

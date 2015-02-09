@@ -25,24 +25,24 @@ public class TextUI implements UI {
 			System.out.print("\n");
 		}
 	}
-
-	private void updateGame() throws IOException{
-		for(int i = 0; i < this.game.getNumRows(); i++){
-			for(int j = 0; j < this.game.getNumCols(); j++){
-				System.out.println(this.game.get(i, j).toString());
-			}
-		}
-	}
 	
 	@Override
 	public void launchGame() throws IOException {
 		while(true){
 			this.printGrid();
 			System.out.println("Your next move:");
-			Scanner input_str = new Scanner(System.in);
-			this.game.move(input_str.nextLine().charAt(0));
-			this.updateGame();
-			input_str.close();
+			@SuppressWarnings("resource")
+			Scanner input = new Scanner(System.in);
+			char input_char = input.nextLine().charAt(0);
+			this.game.move(input_char);
+			
+			int won = this.game.hasWon();
+			if(won == 1 || won == 2 || won == 3){
+				break;
+			} else {
+				input.reset();
+			}
+			
 		}
 	}
 

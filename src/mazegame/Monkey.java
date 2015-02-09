@@ -22,14 +22,6 @@ public class Monkey extends Sprite implements Moveable {
 	}
 	
 	/**
-	 * Returns the number of moves the Monkey has made
-	 * @return the number of moves the Monkey made in integer form
-	 */
-	public int getnumMoves(){
-		return this.numMoves;
-	}
-	
-	/**
 	 * Returns the current score of Monkey
 	 * @return the current score of the Monkey
 	 */
@@ -38,10 +30,16 @@ public class Monkey extends Sprite implements Moveable {
 	}
 	
 	public void move(int col, int row){
-		this.row += row;
-		this.column += col;
-		this.numMoves += 1;
+		this.row = row;
+		this.column = col;
+		this.numMoves = this.getNumMoves() + 1;
 	}
+	
+	/**
+	 * Returns the number of moves the Monkey has made
+	 * @return the number of moves the Monkey made in integer form
+	 */
+	
 	public int getNumMoves() {
 		return this.numMoves;
 	}
