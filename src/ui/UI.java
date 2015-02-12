@@ -10,9 +10,13 @@ import java.io.IOException;
 public interface UI {
 	
 	/**
-	 * 
+	 * Launches the game of the selected UI
 	 * @throws IOException
 	 */
 	public void launchGame() throws IOException;
+	
+	/**
+	 * Displays the end message once game ends
+	 */
 	public void displayWinner();
 }
