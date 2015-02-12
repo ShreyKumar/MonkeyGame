@@ -6,10 +6,18 @@ User interface from gui to text can be changed with MazeConstants.java by alteri
 
 <center><h1>How to play:</h1></center><br>
 This is a two player monkey maze game. The objective of the game is to get all the bananas before the other player. When there are no bananas left, the player with the highest number of points win. 
-<br> There are also MobileBananas which move randomly along the arraygrid.<br>
+<br> There are also MobileBananas which move randomly along the arraygrid when a player makes a move.<br>
 Monkeys also leave dots along their trail. Nobody can enter those dots.<br>
 When both Monkeys are stuck, its a tie and nobody wins!<br>
 <b>Legend:</b><br>
+<ul>
+  <li>1 = Player 1</li>
+  <li>2 = Player 2</li>
+  <li>M = Mobile Banana</li>
+  <li>X = Wall</li>
+  <li>. = Visited spot</li>
+  <li>B = Banana</li>
+</ul>
 Player 1<br>
 <ul>
   <li> W = Move up </li>
