@@ -9,7 +9,7 @@ This is a two player monkey maze game. The objective of the game is to get all t
 <br> There are also MobileBananas which move randomly along the arraygrid.<br>
 Monkeys also leave dots along their trail. Nobody can enter those dots.<br>
 When both Monkeys are stuck, its a tie and nobody wins!<br>
-<b>Legend:<b><br>
+<b>Legend:</b><br>
 Player 1<br>
 <ul>
   <li> W = Move up </li>
