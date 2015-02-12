@@ -205,19 +205,23 @@ public class MazeGame {
 			 */
 			switch(direction){
 				case "up":
-					player.move(player.getColumn(), player.getRow() - 1);
+					player.move(player.getColumn(), player.getRow() + 
+							MazeConstants.UP);
 					maze.setCell(player.getRow(), player.getColumn(), player);
 					break;
 				case "down":
-					player.move(player.getColumn(), player.getRow() + 1);
+					player.move(player.getColumn(), player.getRow() + 
+							MazeConstants.DOWN);
 					maze.setCell(player.getRow(), player.getColumn(), player);
 					break;
 				case "right":
-					player.move(player.getColumn() + 1, player.getRow());
+					player.move(player.getColumn() + 
+							MazeConstants.RIGHT, player.getRow());
 					maze.setCell(player.getRow(), player.getColumn(), player);
 					break;
 				case "left":
-					player.move(player.getColumn() - 1, player.getRow());
+					player.move(player.getColumn() + 
+							MazeConstants.LEFT, player.getRow());
 					maze.setCell(player.getRow(), player.getColumn(), player);
 					break;
 			}
@@ -271,9 +275,10 @@ public class MazeGame {
     			switch(randomno){
     			/* if number = 0, then move up */
     			case 0:
-    				if(this.inBound(mobile.getRow() - 1, mobile.getColumn()) &&
-    						this.mb_valid_space(
-    								maze.getCell(mobile.getRow() - 1, 
+    				if(this.inBound(mobile.getRow() + MazeConstants.UP, 
+    						mobile.getColumn()) && this.mb_valid_space(
+    								maze.getCell(mobile.getRow() + 
+    										MazeConstants.UP, 
     										mobile.getColumn()))){
     					
     					maze.setCell(mobile.getRow(), mobile.getColumn(), 
@@ -281,7 +286,8 @@ public class MazeGame {
     									MazeConstants.VACANT, mobile.getRow(), 
     										mobile.getColumn()));
     					
-    					mobile.move(mobile.getRow() - 1, mobile.getColumn());
+    					mobile.move(mobile.getRow() + MazeConstants.UP, 
+    							mobile.getColumn());
     					
     					maze.setCell(mobile.getRow(), mobile.getColumn(), 
     							mobile);
@@ -292,7 +298,8 @@ public class MazeGame {
     				if(this.inBound(mobile.getRow()+1, mobile.getColumn()) 
     						&& this.mb_valid_space(
     								maze.getCell(
-    										mobile.getRow() + 1, 
+    										mobile.getRow() + 
+    										MazeConstants.DOWN, 
     										mobile.getColumn()))){
     					
     					maze.setCell(mobile.getRow(), mobile.getColumn(), 
@@ -300,7 +307,8 @@ public class MazeGame {
     									MazeConstants.VACANT, 
     									mobile.getRow(), mobile.getColumn()));
     					
-    					mobile.move(mobile.getRow() + 1, mobile.getColumn());
+    					mobile.move(mobile.getRow() + 
+    							MazeConstants.DOWN, mobile.getColumn());
     					
     					maze.setCell(mobile.getRow(), mobile.getColumn(), 
     							mobile);
@@ -308,17 +316,19 @@ public class MazeGame {
     			break;
     			/* if number = 2, then move left */
     			case 2:
-    				if(this.inBound(mobile.getRow(), mobile.getColumn() - 1) 
-    						&& this.mb_valid_space(
+    				if(this.inBound(mobile.getRow(), mobile.getColumn() 
+    						+ MazeConstants.LEFT) && this.mb_valid_space(
     								maze.getCell(
     										mobile.getRow(), 
-    										mobile.getColumn() - 1))){
+    										mobile.getColumn() + 
+    										MazeConstants.LEFT))){
     					
     					maze.setCell(mobile.getRow(), mobile.getColumn(), 
     							new UnvisitedHallway(MazeConstants.VACANT, 
     									mobile.getRow(), mobile.getColumn()));
     					
-    					mobile.move(mobile.getRow(), mobile.getColumn() - 1);
+    					mobile.move(mobile.getRow(), mobile.getColumn() + 
+    							MazeConstants.LEFT);
     					
     					maze.setCell(mobile.getRow(), mobile.getColumn(), 
     							mobile);
@@ -326,17 +336,19 @@ public class MazeGame {
     			break;
     			case 3:
     			/* if number = 3, then move right */
-    				if(this.inBound(mobile.getRow(), mobile.getColumn() + 1) &&
-    						this.mb_valid_space(
+    				if(this.inBound(mobile.getRow(), mobile.getColumn() + 
+    						MazeConstants.RIGHT) && this.mb_valid_space(
     								maze.getCell(
     										mobile.getRow(), 
-    										mobile.getColumn() + 1))){
+    										mobile.getColumn() + 
+    										MazeConstants.RIGHT))){
     					
     					maze.setCell(mobile.getRow(), mobile.getColumn(), 
     							new UnvisitedHallway(MazeConstants.VACANT, 
     									mobile.getRow(), mobile.getColumn()));
     					
-    					mobile.move(mobile.getRow(), mobile.getColumn() + 1);
+    					mobile.move(mobile.getRow(), mobile.getColumn() + 
+    							MazeConstants.RIGHT);
     					
     					maze.setCell(mobile.getRow(), mobile.getColumn(), 
     							mobile);
@@ -375,7 +387,7 @@ public class MazeGame {
     		int row = player1.getRow();
     		
     		/* Move Sprite and MobileBanana */
-        	Sprite tomove = maze.getCell(row - 1, column);
+        	Sprite tomove = maze.getCell(row + MazeConstants.UP, column);
     		this.move_sprite(player1, player1.getColumn(), 
     				player1.getRow(), tomove, "up");
     		this.move_mobile();
@@ -388,7 +400,7 @@ public class MazeGame {
     		int row = player1.getRow();
 
     		/* Move Sprite and MobileBanana */
-    		Sprite tomove = maze.getCell(row, column - 1);
+    		Sprite tomove = maze.getCell(row, column + MazeConstants.LEFT);
     		this.move_sprite(player1, column, row, tomove, "left");
     		this.move_mobile();
     	
@@ -401,7 +413,7 @@ public class MazeGame {
     		int row = player1.getRow();
 
     		/* Move Sprite and MobileBanana */
-    		Sprite tomove = maze.getCell(row + 1, column);
+    		Sprite tomove = maze.getCell(row + MazeConstants.DOWN, column);
     		this.move_sprite(player1, column, row, tomove, "down");
     		this.move_mobile();
     	
@@ -414,7 +426,7 @@ public class MazeGame {
     		int row = player1.getRow();
 
     		/* Move Sprite and MobileBanana */
-    		Sprite tomove = maze.getCell(row, column + 1);
+    		Sprite tomove = maze.getCell(row, column + MazeConstants.RIGHT);
     		this.move_sprite(player1, column, row, tomove, "right");
     		this.move_mobile();
     	}
@@ -429,7 +441,7 @@ public class MazeGame {
     		int row = player2.getRow();
 
     		/* Move Sprite and MobileBanana */
-        	Sprite tomove = maze.getCell(row - 1, column);
+        	Sprite tomove = maze.getCell(row + MazeConstants.UP, column);
     		this.move_sprite(player2, player2.getColumn(), 
     				player2.getRow(), tomove, "up");
     		this.move_mobile();
@@ -442,19 +454,19 @@ public class MazeGame {
     		int row = player2.getRow();
 
     		/* Move Sprite and MobileBanana */
-    		Sprite tomove = maze.getCell(row, column - 1);
+    		Sprite tomove = maze.getCell(row, column + MazeConstants.LEFT);
     		this.move_sprite(player2, column, row, tomove, "left");
     		this.move_mobile();
     	
 
-        /* bott cell */
+        /* bottom cell */
     	} else if(nextMove == MazeConstants.P2_DOWN){
     		
     		/* Get current position */
     		int column = player2.getColumn();
     		int row = player2.getRow();
     		
-    		Sprite tomove = maze.getCell(row + 1, column);
+    		Sprite tomove = maze.getCell(row + MazeConstants.DOWN, column);
     		this.move_sprite(player2, column, row, tomove, "down");
     		this.move_mobile();
     	
@@ -466,7 +478,7 @@ public class MazeGame {
     		int row = player2.getRow();
 
     		/* Move Sprite and MobileBanana */
-    		Sprite tomove = maze.getCell(row, column + 1);
+    		Sprite tomove = maze.getCell(row, column + MazeConstants.RIGHT);
     		this.move_sprite(player2, column, row, tomove, "right");
     		this.move_mobile();
     	}
@@ -595,17 +607,17 @@ public class MazeGame {
 		int p2col = this.player2.getColumn();
 		
 		/* Player 1's top, bott, left and right Sprite cell */
-		Sprite p1top = maze.getCell(p1row - 1, p1col);
-		Sprite p1bott = maze.getCell(p1row + 1, p1col);
-		Sprite p1left = maze.getCell(p1row, p1col - 1);
-		Sprite p1right = maze.getCell(p1row, p1col + 1);
+		Sprite p1top = maze.getCell(p1row + MazeConstants.UP, p1col);
+		Sprite p1bott = maze.getCell(p1row + MazeConstants.DOWN, p1col);
+		Sprite p1left = maze.getCell(p1row, p1col + MazeConstants.LEFT);
+		Sprite p1right = maze.getCell(p1row, p1col + MazeConstants.RIGHT);
 		
 
 		/* Player 2's top, bott, left and right Sprite cell*/
-		Sprite p2top = maze.getCell(p2row - 1, p2col);
-		Sprite p2bott = maze.getCell(p2row + 1, p2col);
-		Sprite p2left = maze.getCell(p2row, p2col - 1);
-		Sprite p2right = maze.getCell(p2row, p2col + 1);
+		Sprite p2top = maze.getCell(p2row + MazeConstants.UP, p2col);
+		Sprite p2bott = maze.getCell(p2row + MazeConstants.DOWN, p2col);
+		Sprite p2left = maze.getCell(p2row, p2col + MazeConstants.LEFT);
+		Sprite p2right = maze.getCell(p2row, p2col + MazeConstants.RIGHT);
 		
 		/* Determine if Player 1 is blocked */
 		boolean p1;
